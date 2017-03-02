@@ -23,16 +23,17 @@ RSpec.describe Project do
 
   describe "estimates" do 
     let(:project) { Project.new }
-    let(:done) { Task.new(size: 2, completed: true)}
+    let(:newly_done) { Task.new(size: 2, completed_at: 1.day.ago)}
+    let(:old_done) { Task.new(size: 2, completed_at: 6.months.ago)}
     let(:small_not_done) { Task.new(size: 1) }
     let(:large_not_done) { Task.new(size: 4) }
 
     before(:example){
-      project.tasks = [done, small_not_done, large_not_done]
+      project.tasks = [newly_done, old_done, small_not_done, large_not_done]
     }
 
     it "can calculate total size" do
-      expect(projet.total_size).to eq(7)
+      expect(project.total_size).to eq(7)
     end
 
     it "can calcuate remaining size" do 

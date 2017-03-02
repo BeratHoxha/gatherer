@@ -5,6 +5,19 @@ class Project
   end  
   
   def done?
-    tasks.reject(&:complete?).empty?
+    incomplete_tasks.empty?
   end
+
+  def incomplete_tasks
+    tasks.reject(&:complete?)
+  end
+
+  def total_size
+    tasks.sum(&:size)
+  end
+
+  def remaining_size
+    incomplete_tasks.sum(&:size)
+  end
+
 end
