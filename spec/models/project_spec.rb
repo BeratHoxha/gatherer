@@ -33,7 +33,7 @@ RSpec.describe Project do
     }
 
     it "can calculate total size" do
-      expect(project.total_size).to eq(7)
+      expect(project.total_size).to eq(10)
     end
 
     it "can calcuate remaining size" do 
@@ -56,6 +56,7 @@ RSpec.describe Project do
       project.due_date = 1.week.from_now
       expect(project).not_to be_on_schedule
       project.due_date = 6.months.from_now
+      expect(project).to be_on_schedule
     end
 
   end
