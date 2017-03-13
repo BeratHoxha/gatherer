@@ -23,7 +23,7 @@ RSpec.describe Project do
 
   describe "estimates" do 
     let(:project) { Project.new }
-    let(:newly_done) { Task.new(size: 2, completed_at: 1.day.ago)}
+    let(:newly_done) { Task.new(size: 3, completed_at: 1.day.ago)}
     let(:old_done) { Task.new(size: 2, completed_at: 6.months.ago)}
     let(:small_not_done) { Task.new(size: 1) }
     let(:large_not_done) { Task.new(size: 4) }
@@ -39,5 +39,24 @@ RSpec.describe Project do
     it "can calcuate remaining size" do 
       expect(project.remaining_size).to eq(5)
     end
+
+    it "knows its velocity" do
+      expect(project.completed_velocity).to eq(3)
+    end
+
+    it "knows its rate" do 
+      expect(project.current_rate).to eq(1.0/7)
+    end
+
+    it "knows its projected time remaining" do 
+      expect(project.projected_days_remaining).to eq(35)
+    end
+
+    it "knows if it on schedule" do 
+      project.due_date = 1.week.from_now
+      expect(project).not_to be_on_schedule
+      project.due_date = 6.months.from_now
+    end
+
   end
 end
