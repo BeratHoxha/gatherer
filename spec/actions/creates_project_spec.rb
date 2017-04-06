@@ -42,6 +42,4 @@ describe "task string parsing" do
         an_object_having_attributes(title: "End things", size: 2)]) 
     end
   end
-
-
 end
